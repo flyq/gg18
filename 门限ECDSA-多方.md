@@ -196,7 +196,7 @@ Paillier算法主要包含如下3个算法：
 
 **分析**：
 
-- **正确性：**假设Alice和Bob两个人都是诚实的，并且$a<K,b<K,N>K^2\cdot q$。Alice和Bob交互最终想要得到的是$x=\alpha +\beta =abmod ~q$。
+- **正确性：** 假设Alice和Bob两个人都是诚实的，并且$a<K,b<K,N>K^2\cdot q$。Alice和Bob交互最终想要得到的是$x=\alpha +\beta =abmod ~q$。
 
   我们发现Alice执行paillier解密算法时，解密出的值$\alpha' = ab+\beta'\space mod \space N$。
 
