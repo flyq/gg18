@@ -7,41 +7,41 @@
 该文档主要介绍的是2018年美密的一篇文章“Fast Multiparty Threshold ECDSA with Fast Trustless Setup”。该文章介绍了一个多方的门限ECDSA方案。目前针对于该方案已经实现并开源的项目有ZenGo（rust开发的）。该文章中介绍的方案可以应用在传统的DSA与ECDSA上，但是为了简便以及与其它研究者方案在效率等方面做对比，该文章中依然采用“Threshold-optimal DSA/ECDSA signatures and an application to Bitcoin wallet security”中对DSA方案的记号描述。也就是我们接下来要展示的方案generic G-DSA。
 
 ## Contents
-- [门限ECDSA — 多方](#%e9%97%a8%e9%99%90ecdsa--%e5%a4%9a%e6%96%b9)
+- [门限ECDSA — 多方](#门限ecdsa--多方)
   - [Contents](#contents)
 - [1. Generic G-DSA](#1-generic-g-dsa)
-  - [1.1. 系统参数](#11-%e7%b3%bb%e7%bb%9f%e5%8f%82%e6%95%b0)
-  - [1.2. 密钥生成](#12-%e5%af%86%e9%92%a5%e7%94%9f%e6%88%90)
-  - [1.3. 签名生成](#13-%e7%ad%be%e5%90%8d%e7%94%9f%e6%88%90)
-  - [1.4. 验证签名](#14-%e9%aa%8c%e8%af%81%e7%ad%be%e5%90%8d)
-- [2. 承诺](#2-%e6%89%bf%e8%af%ba)
-  - [2.1. 定义](#21-%e5%ae%9a%e4%b9%89)
-  - [2.2. 两个阶段与两个特性](#22-%e4%b8%a4%e4%b8%aa%e9%98%b6%e6%ae%b5%e4%b8%8e%e4%b8%a4%e4%b8%aa%e7%89%b9%e6%80%a7)
+  - [1.1. 系统参数](#11-系统参数)
+  - [1.2. 密钥生成](#12-密钥生成)
+  - [1.3. 签名生成](#13-签名生成)
+  - [1.4. 验证签名](#14-验证签名)
+- [2. 承诺](#2-承诺)
+  - [2.1. 定义](#21-定义)
+  - [2.2. 两个阶段与两个特性](#22-两个阶段与两个特性)
   - [2.3. Non-Malleable Equivocable Commitments](#23-non-malleable-equivocable-commitments)
 - [3. Paillier](#3-paillier)
-  - [3.1. 方案介绍](#31-%e6%96%b9%e6%a1%88%e4%bb%8b%e7%bb%8d)
-  - [3.2. 同态属性](#32-%e5%90%8c%e6%80%81%e5%b1%9e%e6%80%a7)
-  - [3.3. MtA协议（Multiplicative to Additive）](#33-mta%e5%8d%8f%e8%ae%aemultiplicative-to-additive)
-  - [3.4. MtAwc协议](#34-mtawc%e5%8d%8f%e8%ae%ae)
-- [4. VSS协议](#4-vss%e5%8d%8f%e8%ae%ae)
-  - [4.1. 参数介绍](#41-%e5%8f%82%e6%95%b0%e4%bb%8b%e7%bb%8d)
+  - [3.1. 方案介绍](#31-方案介绍)
+  - [3.2. 同态属性](#32-同态属性)
+  - [3.3. MtA协议（Multiplicative to Additive）](#33-mta协议multiplicative-to-additive)
+  - [3.4. MtAwc协议](#34-mtawc协议)
+- [4. VSS协议](#4-vss协议)
+  - [4.1. 参数介绍](#41-参数介绍)
   - [4.2. Initialization](#42-initialization)
   - [4.3. Distribution](#43-distribution)
   - [4.4. Reconstruction](#44-reconstruction)
 - [5. ZK](#5-zk)
-  - [5.1. 零知识协议](#51-%e9%9b%b6%e7%9f%a5%e8%af%86%e5%8d%8f%e8%ae%ae)
+  - [5.1. 零知识协议](#51-零知识协议)
   - [5.2. Proof of knowledge for factoring](#52-proof-of-knowledge-for-factoring)
     - [5.2.1. interactive proof of knowledge for factoring](#521-interactive-proof-of-knowledge-for-factoring)
     - [5.2.2. optimized version](#522-optimized-version)
     - [5.2.3. non-interacctive proof of knowledge for factoring](#523-non-interacctive-proof-of-knowledge-for-factoring)
   - [5.3. range proof](#53-range-proof)
-- [6. 门限ECDSA方案介绍](#6-%e9%97%a8%e9%99%90ecdsa%e6%96%b9%e6%a1%88%e4%bb%8b%e7%bb%8d)
-  - [6.1. 参数设置](#61-%e5%8f%82%e6%95%b0%e8%ae%be%e7%bd%ae)
-  - [6.2. 密钥生成](#62-%e5%af%86%e9%92%a5%e7%94%9f%e6%88%90)
-  - [6.3. 签名](#63-%e7%ad%be%e5%90%8d)
-  - [6.4. 验签](#64-%e9%aa%8c%e7%ad%be)
-- [7. 代码实现](#7-%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
-- [8. 参考文献](#8-%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae)
+- [6. 门限ECDSA方案介绍](#6-门限ecdsa方案介绍)
+  - [6.1. 参数设置](#61-参数设置)
+  - [6.2. 密钥生成](#62-密钥生成)
+  - [6.3. 签名](#63-签名)
+  - [6.4. 验签](#64-验签)
+- [7. 代码实现](#7-代码实现)
+- [8. 参考文献](#8-参考文献)
 
 # 1. Generic G-DSA
 
@@ -53,8 +53,8 @@ Generic DSA签名算法的系统参数有：
 
 - $\mathbb{G}$：阶为素数$q$的循环群
 - $g$：循环群$\mathbb{G}$的生成元
-- $H$：$\{0,1\}^* \rightarrow \mathbb{Z}_q $
-- $H'$：$\mathbb{G}\rightarrow \mathbb{Z}_q $
+- $H$：$\{0,1\}^* \rightarrow \mathbb{Z}_q$
+- $H'$：$\mathbb{G}\rightarrow \mathbb{Z}_q$
 
 ## 1.2. 密钥生成
 
@@ -127,7 +127,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 - $KG$：密钥生成算法，输入为安全参数，输出为一对密钥$(pk,tk)$，其中$pk$是用于计算承诺值的公钥，$tk$称为trapdoor。
 - $Com$：承诺算法，输入为公钥$pk$和消息$M$，输出为$Com(pk,M,R) = [C(M),D(M)]$，其中$r$为随机选择的随机数，$C(M)$为承诺commitment string，$D(M)$为decommitment string，$D(M)$私密保存直到承诺打开阶段。
 - $Ver$：验证算法，输入为$C,D,pk$，输出为消息$M$或者$\perp$。
-- $Equiv$：承诺打开算法，给定trapdoor信息的情况下，尝试使用任何的方式来打开承诺。即利用输入$pk,M,R $，满足$Com(pk,M,R)=[C(M),D(M)]$以及消息$M'\neq M$和字符串$T$。如果$T=tk$，则$Equiv$算法输出$D'$且满足$Ver(pk,C(M),D') = M'$。
+- $Equiv$：承诺打开算法，给定trapdoor信息的情况下，尝试使用任何的方式来打开承诺。即利用输入$pk,M,R$，满足$Com(pk,M,R)=[C(M),D(M)]$以及消息$M'\neq M$和字符串$T$。如果$T=tk$，则$Equiv$算法输出$D'$且满足$Ver(pk,C(M),D') = M'$。
 
 注意：如果发送者拒绝执行打开算法，我们可以设置$D=\perp$且$Ver(pk,C,\perp)=\perp$
 
@@ -168,7 +168,7 @@ Paillier算法主要包含如下3个算法：
 
 - 有两方Alice和Bob，Alice的secret为$a\in \mathbb{Z}_q$，Bob的secret为$b\in \mathbb{Z}_q$
 - 我们现在要考虑的是Alice和Bob的两个人的secret乘积的shares，即share of a secret $x=ab \space mod\space q$。
-- Alice和Bob要分别计算secret $x$的加法shares $\alpha,\beta$，即Alice和Bob分别要找到随机值$\alpha,\beta $使得$\alpha +\beta = x = ab \space mod \space q$。
+- Alice和Bob要分别计算secret $x$的加法shares $\alpha,\beta$，即Alice和Bob分别要找到随机值$\alpha,\beta$使得$\alpha +\beta = x = ab \space mod \space q$。
 - 假设$B=g^b$是公开的（对Bob secret的承诺值是公开的，this extra check for Bob is used to force him to use the correct value b）
 
 通过使用具备加同态属性的加密算法，我们可以到达上述要求，假设使用的就是Paillier加密算法$\mathcal{E}$
@@ -264,9 +264,7 @@ $$
 
 ​		等式成立的正确性：
 $$
-\begin{align}
-g^{f(i)}&=c_0c_1^ic_2^{i^2}...c_t^{i^t}=\prod_{j=0}^{t}c_j^{i^j}=\prod_{j=0}^{t}g^{{a_j}^{i^j}}=g^{\sum_{j=0}^{t}{a_j}^{i^j}}=g^{f(i)}
-\end{align}
+g^{f(i)}  =  c_0c_1^ic_2^{i^2}...c_t^{i^t}  =  \prod_{j=0}^{t}c_j^{i^j}  =  \prod_{j=0}^{t}g^{{a_j}^{i^j}}  =  g^{\sum_{j=0}^{t}{a_j}^{i^j}}  =  g^{f(i)}
 $$
 
 ​		如果上述等式验证不成立，则参与者会发出一个complaint，当针对某个参与者的complaint超过门限值$t$，则		该参与者被取消资格。（**注意：在门限ECDSA方案中，此处处理会有点差别，对于任何参与者只要发现上		述等式验证不通过，参与者发出一个compliant，那么此时协议直接会终止。这是因为在文章中前提假设是		大部分的人是不诚实的，而Feldman VSS协议是假设大部分是诚实的。**）
@@ -289,7 +287,7 @@ $$
 
 **（1）方案一**
 
-证明者Prover要向验证者Verifier证明她知道$x$满足$y=g^x$且不泄露$x$的信息，其中$g$是阶为素数$q$的循环群$\mathbb{G} $的生成元，$y$是公开的。交互零知识证明过程如下：
+证明者Prover要向验证者Verifier证明她知道$x$满足$y=g^x$且不泄露$x$的信息，其中$g$是阶为素数$q$的循环群$\mathbb{G}$的生成元，$y$是公开的。交互零知识证明过程如下：
 
 - Prover选择随机值$\omega \in \mathbb{Z}_q$ ，并计算$\alpha =g^{\omega }$，并将$\alpha$ 发送给Verifier
 
@@ -303,7 +301,7 @@ $$
 
 本方案除用到上述方案外，还用到以下零知识方案，Prover要证明她知道$s,l\in \mathbb{Z}_q$使得等式$V=R^sg^l, A = g^{\rho}, B = A^l$成立，其中$g,R,A$是公开的，
 
-- Prover 选择随机值 $a,b\in_R\mathbb{Z}_q$，并计算$\alpha=R^ag^b, \beta =A^b $发送给验证者；
+- Prover 选择随机值 $a,b\in_R\mathbb{Z}_q$，并计算$\alpha=R^ag^b, \beta =A^b$发送给验证者；
 - Verifier选择随机值$c\in_R\mathbb{Z}_q$，并发送给Prover；
 - Prover计算 $t=a+cs\ mod\ q$ 以及$u=b+cl\ mod\ q$
 - Verifier验证 
@@ -339,8 +337,8 @@ $$
 
 - $\mathbb{G}$：阶为素数$q$的循环群
 - $g$：循环群$\mathbb{G}$的生成元
-- $H$：$\{0,1\}^* \rightarrow \mathbb{Z}_q $
-- $H'$：$\mathbb{G}\rightarrow \mathbb{Z}_q $
+- $H$：$\{0,1\}^* \rightarrow \mathbb{Z}_q$
+- $H'$：$\mathbb{G}\rightarrow \mathbb{Z}_q$
 - $P_i,i\in[1,n]$：$n$个参与者
 - $\mathcal{E}$：paillier加密方案
 - $E_i,i\in[1,n]$：$n$个参与者对应的paillier加密算法的公钥
@@ -349,7 +347,7 @@ $$
 
 **Phase1：**
 
-- 每个参与者$P_i,i\in[1,n] $ 选择随机值$u_i\in _R\mathbb{Z}_q$，并计算$[KGC_i,KGD_i]=Com(g^{u_i})$，并广播$KGC_i$ 
+- 每个参与者$P_i,i\in[1,n]$ 选择随机值$u_i\in _R\mathbb{Z}_q$，并计算$[KGC_i,KGD_i]=Com(g^{u_i})$，并广播$KGC_i$ 
 
   > $P_1: u_1\in_R \mathbb{Z}_q; ~ Com(g^{u_1}) = [KGC_1,KGD_1]$，广播$KGC_1$
   >
@@ -359,11 +357,11 @@ $$
   >
   > $P_n: u_n\in_R \mathbb{Z}_q; ~ Com(g^{u_n}) = [KGC_n,KGD_n]$，广播$KGC_n$
 
-- 每个参与者$P_i,i\in[1,n] $ 广播Paillier加密的公钥$E_i$
+- 每个参与者$P_i,i\in[1,n]$ 广播Paillier加密的公钥$E_i$
 
 **Phase2:**
 
-- 每个参与者$P_i,i\in[1,n] $ 广播$KGD_i$
+- 每个参与者$P_i,i\in[1,n]$ 广播$KGD_i$
 
 - 令$y_i$为参与者$P_i$ decommit 出来的值，即$y_i = g^{u_i}$
 
@@ -407,11 +405,11 @@ $$
 
 > $P_1: N_1=p_1q_1$；生成ZK证明其知道自己的私钥$x_1$；生成ZK证明其知道$p_1,q_1$
 >
-> $\ldots $
+> $\ldots$
 >
 > $P_i: N_i=p_iq_i$；生成ZK证明其知道自己的私钥$x_i$；生成ZK证明其知道$p_i,q_i$
 >
-> $\ldots $
+> $\ldots$
 >
 > $P_n: N_n=p_nq_n$；生成ZK证明其知道自己的私钥$x_n$；生成ZK证明其知道$p_n,q_n$
 
@@ -467,11 +465,11 @@ $$
 
   > $P_1: k_1,\gamma_1 \in \mathbb{Z}_q$, compute  $Com(g^{\gamma_1}) =[C_1,D_1] ,C_1 = H(g^{\gamma_1}||r_1')$
   >
-  > $\ldots $
+  > $\ldots$
   >
   > $P_{t'}: k_{t'},\gamma_{t'} \in \mathbb{Z}_q$, compute  $Com(g^{\gamma_{t'}}) =[C_{t'},D_{t'}] ,C_{t'} = H(g^{\gamma_{t'}}||r_{t'}')$
   >
-  > $\ldots $
+  > $\ldots$
   >
   > $P_n: k_n,\gamma_n \in \mathbb{Z}_q$, compute  $Com(g^{\gamma_n}) =[C_n,D_n] ,C_n = H(g^{\gamma_n}||r_n')$
 
@@ -499,7 +497,7 @@ $$
 
 **Phase 3**：
 
-- 每个参与者$P_i$广播$\delta_i $
+- 每个参与者$P_i$广播$\delta_i$
 - 每个参与者重构$\delta = \sum_{i\in S}\delta_i = k\gamma$
 - 每个参与者均可计算出$\delta^{-1} \space mod\space q$
 
@@ -583,7 +581,7 @@ $$
 
 - 否则每个参与者$P_i$广播$s_i$，此时每个参与者均可以计算$s=\sum_{i \in S} s_i$，如果此时$(r,s)$是不合理的，则终止协议，否则接受并结束该协议。
 
-总结：**(5A) - (5E)**这几步是为了避免使用expensive ZK proof而构造的分布式随机化签名验证，如果该验证通过，那么则说明揭露签名shares $s_i $是安全的。
+总结：**(5A) - (5E)**这几步是为了避免使用expensive ZK proof而构造的分布式随机化签名验证，如果该验证通过，那么则说明揭露签名shares $s_i$是安全的。
 
 > If this distributed randomized signature verification carries out, then it is safe to release the shares $s_i$, but if the signature does not verify then the protocol aborts here and the values $s_i$ held by the good players are never revealed in the clear.
 
