@@ -116,7 +116,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 - 如果发送者是概率多项式的，则称computationally binding；
 - 如果发送者是有无限计算能力的人，则称perfectly binding。
 
-**示例：**发送者将箱子打开，即告诉接收者其承诺的值$m,r$，其中$r$为在承诺过程中选择的随机值。
+**示例：** 发送者将箱子打开，即告诉接收者其承诺的值$m,r$，其中$r$为在承诺过程中选择的随机值。
 
 ![1564990247370](images/1564990247370.png)
 
@@ -581,7 +581,7 @@ $$
 
 - 否则每个参与者$P_i$广播$s_i$，此时每个参与者均可以计算$s=\sum_{i \in S} s_i$，如果此时$(r,s)$是不合理的，则终止协议，否则接受并结束该协议。
 
-总结：**(5A) - (5E)**这几步是为了避免使用expensive ZK proof而构造的分布式随机化签名验证，如果该验证通过，那么则说明揭露签名shares $s_i$是安全的。
+总结：**(5A) - (5E)** 这几步是为了避免使用expensive ZK proof而构造的分布式随机化签名验证，如果该验证通过，那么则说明揭露签名shares $s_i$是安全的。
 
 > If this distributed randomized signature verification carries out, then it is safe to release the shares $s_i$, but if the signature does not verify then the protocol aborts here and the values $s_i$ held by the good players are never revealed in the clear.
 
