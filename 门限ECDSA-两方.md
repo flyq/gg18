@@ -89,7 +89,7 @@ $$Enc_{pk}(m_1,r_1) \cdot Enc_{pk}(m_2,r_2)=g^{m_1}r_1^n\cdot g^{m_2}r_2^n=g^{m_
 
 > 1）$P_i$ 发送消息$(com-prove,sid, x, w)$
 >
-> 2)   $\mathcal{F}_{com-zk}^{R}$存储$(sid, i ,x)$并发送消息$(proof-receipt,sid)$给$P_{3-i}$
+> 2）$\mathcal{F}_{com-zk}^{R}$存储$(sid, i ,x)$并发送消息$(proof-receipt,sid)$给$P_{3-i}$
 >
 > 3）$P_i$发送$(decom-proof,sid)$
 >
