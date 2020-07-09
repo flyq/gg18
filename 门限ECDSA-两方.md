@@ -26,7 +26,7 @@ ECDSA签名算法基于椭圆曲线群，其简要描述如下：
 > 1. 选择随机值$k \leftarrow \mathbb Z_{q}$
 > 2. 计算$R=k \cdot G=(r_x, r_y)$ ，以及 $r\equiv r_x\ mod\ q$，若$r=0$，则返回第一步，重新选择$k$
 > 3. 计算$m^{'} =H(m)$ ，其中$H$为哈希函数
-> 4. 计算$s \equiv k^{-1}(m^{'}+r \cdot x)\ mod\ q$，若$s =$0，则返回第一步，重新选择$k$
+> 4. 计算$s \equiv k^{-1}(m^{'}+r \cdot x)\ mod\ q$，若$s=0$，则返回第一步，重新选择$k$
 > 5. 输出消息 $m$ 的签名$(r,s)$
 
 
@@ -45,7 +45,7 @@ Paillier加密算法是密码学家Pascal Paillier在1999年设计的公钥密�
 
 算法主要包括三个部分：
 
-- 密钥生成：与RSA类似，需要生成两个长度相同的大素数$p$和$q$，从而计算$N=p \cdot q$ 和 $ \phi(N)$，并取$g = N+1$，输出公钥$N$ 和私钥 $(N, \phi(N))$
+- 密钥生成：与RSA类似，需要生成两个长度相同的大素数$p$和$q$，从而计算$N=p \cdot q$ 和 $\phi(N)$，并取$g = N+1$，输出公钥$N$ 和私钥 $(N, \phi(N))$
 - 加密：随机选择$r$，满足$0<r<$ N，$r\in \mathbb{Z}_{N}^*$，与$N$互质，并计算密文$c=g^m\cdot r^N mod ~ N^2$
 - 解密：计算明文$m=L(c^{\lambda}~mod~N^2)\cdot \mu ~mod~N$，其中$L(x) =\frac{x-1}{N}$。
 
@@ -141,7 +141,7 @@ $$
 
    （b）$P_1$将$(decom-proof, 1)$发送到$\mathcal F_{com-zk}^{R_{DL}}$。
 
-   （c）$P_1$生成一个长度为$ min(3 log |q| + 1, n)$的Paillier密钥对$(pk,sk)$,并计算$c_{key} = Enc_{pk}(x_1)$。
+   （c）$P_1$生成一个长度为$min(3 log |q| + 1, n)$的Paillier密钥对$(pk,sk)$,并计算$c_{key} = Enc_{pk}(x_1)$。
 
    （d）$P_1$将$(prove, 1, N,(p1, p2))$发送给$\mathcal F_{zk}^{R_{P}}$，其中$pk = N = p_1 · p_2$,并将$c_{key}$发送给$P_2$。
 
@@ -157,7 +157,7 @@ $$
 
    （b）接收到证明：$(c_{key},pk,Q_1)\in L_{PDL}$。
 
-   （c）密钥$pk=N$的长度至少为$ min(3 log |q| + 1, n)$。
+   （c）密钥$pk=N$的长度至少为$min(3 log |q| + 1, n)$。
 
 输出：
 
@@ -231,11 +231,11 @@ $P_1,\ P_2$分别对消息进行哈希计算 $m^,\leftarrow H_q(m)$，并且验�
 
 + $L_{PDL}$:
 
-  **输入：**双方都具有的参数为：$ (c, pk, Q_1, \mathbb G, G, q)$，prover具有的参数为$(x_1,sk)$，其中$x_1\in\mathbb Z_{q/3}$。
+  **输入：** 双方都具有的参数为：$(c, pk, Q_1, \mathbb G, G, q)$，prover具有的参数为$(x_1,sk)$，其中$x_1\in\mathbb Z_{q/3}$。
 
   **协议：**
 
-  1. $V$随机选择$a\leftarrow \mathbb Z_q$，$b\leftarrow \mathbb Z_{q^2}$。计算$ c'= (a\odot c)\oplus b$ , $c''=commit(a,b)$,然后$V$把$(c',c'')$发送给$P$。同时$V$计算$Q'=a\cdot Q_1+b\cdot G$。
+  1. $V$随机选择$a\leftarrow \mathbb Z_q$，$b\leftarrow \mathbb Z_{q^2}$。计算$c' = (a \odot c) \oplus b$ , $c''=commit(a,b)$,然后$V$把$(c',c'')$发送给$P$。同时$V$计算$Q'=a\cdot Q_1+b\cdot G$。
   2. $P$从$V$中接收$(c',c'')$，解密获得$\alpha=Dec_{sk}(c')$,并计算$\hat Q=\alpha\cdot G$。$P$将$\hat c=commit(\hat Q)$发送给$V$。
   3. $V$进行$decommit(c'')$，公开$(a,b)$。
   4. $P$验证$\alpha=a\cdot x_1+b$。如果不满足等式，则验证失败。验证成功后对$\hat c$进行$decommit$得到$\hat Q$并公开。
