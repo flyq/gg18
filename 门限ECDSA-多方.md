@@ -125,7 +125,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 一个非交互的trapdoor承诺方案主要包含如下4个算法：
 
 - $KG$：密钥生成算法，输入为安全参数，输出为一对密钥$(pk,tk)$，其中$pk$是用于计算承诺值的公钥，$tk$称为trapdoor。
-- $Com$：承诺算法，输入为公钥$pk$和消息$M$，输出为$Com(pk,M,R) = [C(M),D(M)]$，其中$r$为随机选择的随机数，$C(M)$为承诺commitment string，$D(M)$为decommitment string，$D(M)$私密保存直到承诺打开阶段。
+- $Com$：承诺算法，输入为公钥$pk$和消息$M$，输出为$Com(pk,M,r) = [C(M),D(M)]$，其中$r$为随机选择的随机数，$C(M)$为承诺commitment string，$D(M)$为decommitment string，$D(M)$私密保存直到承诺打开阶段。
 - $Ver$：验证算法，输入为$C,D,pk$，输出为消息$M$或者$\perp$。
 - $Equiv$：承诺打开算法，给定trapdoor信息的情况下，尝试使用任何的方式来打开承诺。即利用输入$pk,M,R$，满足$Com(pk,M,R)=[C(M),D(M)]$以及消息$M'\neq M$和字符串$T$。如果$T=tk$，则$Equiv$算法输出$D'$且满足$Ver(pk,C(M),D') = M'$。
 
