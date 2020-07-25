@@ -30,6 +30,8 @@
   - [定义12：等价关系](#定义12等价关系)
   - [定义13：等价类](#定义13等价类)
   - [定理8](#定理8)
+  - [定理9](#定理9)
+  - [定义10：商集](#定义10商集)
 
 
 # 1. 集合的定义
@@ -267,13 +269,40 @@ $$
 $$
 如果[a] \cap [b] \neq \varnothing, 那么 [a] = [b]
 $$
-证明
+证明：
+
+## 定理9
+$$
+A = \bigcup_{a\in A}[a] \\
+\ \\
+并且[a]之间互不相交 \\
+等价类分割
+$$
+
+证明：
+$$
+\forall a \in A, a \in [a] \Rightarrow a \in \bigcup_{a \in A}[a] \\
+[a] \subseteq A \Rightarrow \bigcup_{a \in A}[a] \subseteq A \\
+根据定理8，\Rightarrow [a] 互不相交
+$$
 
 
+## 定义10：商集
+定义：
+$$
+\begin{aligned}
+  (A, \sim) 定义 A/_{\sim} &= \{ [a] | a \in A \} \\
+  &= A 除以 \sim 的商集
 
+\end{aligned}
+$$
 
-
-
+示例：
+$$
+\mathbb{Z}中，m \sim n 当且仅当 m \equiv n \bmod a \\
+证明：略 \\
+\mathbb{Z}/_\sim = \{ 0, 1, 2, \dots, a-1\}
+$$
 
 
 
