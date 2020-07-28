@@ -7,13 +7,13 @@
 - [抽象代数 Abstract Algebra](#抽象代数-abstract-algebra)
   - [Contents](#contents)
 - [1. 集合的定义](#1-集合的定义)
-  - [定义1：包含$\subseteq$](#定义1包含math-xmlnshttpwwww3org1998mathmathmlsemanticsmrowmomomrowannotation-encodingapplicationx-texsubseteqannotationsemanticsmath)
-  - [定义2：相等$=$](#定义2相等math-xmlnshttpwwww3org1998mathmathmlsemanticsmrowmomomrowannotation-encodingapplicationx-texannotationsemanticsmath)
+  - [定义1：包含$\subseteq$](#定义1包含subseteq)
+  - [定义2：相等$=$](#定义2相等)
   - [定理1：](#定理1)
   - [定理2：](#定理2)
 - [2. 集合的运算](#2-集合的运算)
-  - [定义3：并集$\cup$](#定义3并集math-xmlnshttpwwww3org1998mathmathmlsemanticsmrowmomomrowannotation-encodingapplicationx-texcupannotationsemanticsmath)
-  - [定义4：交集$\cap$](#定义4交集math-xmlnshttpwwww3org1998mathmathmlsemanticsmrowmomomrowannotation-encodingapplicationx-texcapannotationsemanticsmath)
+  - [定义3：并集$\cup$](#定义3并集cup)
+  - [定义4：交集$\cap$](#定义4交集cap)
   - [定理3：](#定理3)
   - [定理4：](#定理4)
   - [定理5：](#定理5)
@@ -31,7 +31,9 @@
   - [定义13：等价类](#定义13等价类)
   - [定理8](#定理8)
   - [定理9](#定理9)
-  - [定义10：商集](#定义10商集)
+  - [定义14：商集](#定义14商集)
+- [映射](#映射)
+  - [定义15：映射](#定义15映射)
 
 
 # 1. 集合的定义
@@ -287,7 +289,7 @@ $$
 $$
 
 
-## 定义10：商集
+## 定义14：商集
 定义：
 $$
 \begin{aligned}
@@ -303,6 +305,32 @@ $$
 证明：略 \\
 \mathbb{Z}/_\sim = \{ 0, 1, 2, \dots, a-1\}
 $$
+
+# 映射
+
+`单射` `满射` `双射`  
+`等势`  
+`卡氏幂`  
+$B^A$
+
+## 定义15：映射
+![](./images/function.PNG)
+
+定义：
+$$
+一个从集合A到集合B的映射是A \times B 的一个子集 f，并且符合以下条件： \\
+对于任意a \in A，存在唯一的 b \in B 使得(a, b) \in f. \\
+
+\begin{aligned}
+f(a) &= b: \quad  f: A \rightarrow B \\
+a &\mapsto b
+\end{aligned}
+$$
+
+
+
+
+
 
 
 
