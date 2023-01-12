@@ -1,13 +1,11 @@
+# Fast Multiparty Threshold ECDSA with Fast Trustless Setup
+
 [TOC]
-
-
-
-# 门限ECDSA — 多方
 
 该文档主要介绍的是2018年美密的一篇文章“Fast Multiparty Threshold ECDSA with Fast Trustless Setup”。该文章介绍了一个多方的门限ECDSA方案。目前针对于该方案已经实现并开源的项目有ZenGo（rust开发的）。该文章中介绍的方案可以应用在传统的DSA与ECDSA上，但是为了简便以及与其它研究者方案在效率等方面做对比，该文章中依然采用“Threshold-optimal DSA/ECDSA signatures and an application to Bitcoin wallet security”中对DSA方案的记号描述。也就是我们接下来要展示的方案generic G-DSA。
 
 ## Contents
-- [门限ECDSA — 多方](#门限ecdsa--多方)
+- [Fast Multiparty Threshold ECDSA with Fast Trustless Setup](#fast-multiparty-threshold-ecdsa-with-fast-trustless-setup)
   - [Contents](#contents)
 - [1. Generic G-DSA](#1-generic-g-dsa)
   - [1.1. 系统参数](#11-系统参数)
