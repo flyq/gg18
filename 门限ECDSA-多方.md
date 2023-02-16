@@ -49,7 +49,7 @@
 
 Generic DSA 签名算法的系统参数有：
 
-- $\mathbb{G}$ ：阶为素数  $ q $  的循环群
+- $\mathbb{G}$ ：阶为素数  $q $  的循环群
 - $ g $ ：循环群  $ \mathbb{G} $  的生成元
 - $ H $ ： $ \{0,1\}^* \rightarrow \mathbb{Z}_q $ 
 - $ H' $ ： $ \mathbb{G}\rightarrow \mathbb{Z}_q $ 
