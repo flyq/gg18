@@ -56,7 +56,7 @@ Generic DSA 签名算法的系统参数有：
 
 ## 1.2. 密钥生成
 
-每个签名者都需要产生一对密钥 $(pk,sk)$，即一个公钥 $pk$ 和一个私钥 $sk$，其中 $sk$ 用于生成签名，$pk$ 用于验证签名的合理性。密钥生成算法如下：
+每个签名者都需要产生一对密钥 $(pk,sk)$，即一个公钥 $pk$ 和一个私钥 $sk$，其中 $sk$ 用于生成签名， $pk$ 用于验证签名的合理性。密钥生成算法如下：
 
 - 均匀随机地选择 $x\in \mathbb{Z}_q$ 
 - 计算 $y=g^x$
@@ -68,11 +68,11 @@ Generic DSA 签名算法的系统参数有：
 
 （1）均匀随机选择 $k\in \mathbb{Z}_q$ 
 
-​		【ECDSA：$k\in [1,q]$，其中 $q$ 为椭圆曲线群的基点 $G$ 的阶】
+​		【ECDSA： $k\in [1,q]$，其中 $q$ 为椭圆曲线群的基点 $G$ 的阶】
 
 （2）计算 $R=g^{k^{-1}}\in \mathbb{G}$ 和 $r=H^\prime(R)\in \mathbb{Z}_q$
 
-​		【ECDSA：计算 $P=kG=(x,y)$ ，点 $P$ 属于椭圆曲线群，以及 $r\equiv x\ mod\ q$，即此时的 $H'(R) =R_x ~mod~q$ 】
+​		【ECDSA：计算 $P=kG=(x,y)$ ，点 $P$ 属于椭圆曲线群，以及 $r\equiv x\ mod\ q$，即此时的 $H'(R) =R_x mod q$ 】
 
 （3）计算 $m=H(M)\in \mathbb{Z}_q$ 
 
@@ -100,7 +100,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 
 承诺主要包括如下两个阶段：
 
-**（1）承诺阶段**（a value is chosen and specified）$Com(\cdot,\cdot)$：它允许一个人对一个选定的值 $v$ 做出承诺commit，该值 $v$ 对其他人是不可见的。通常该过程必须要满足hiding特性，即收到该承诺commit的接收者无法获取关于承诺值 $v$ 的任何信息。
+**（1）承诺阶段**（a value is chosen and specified） $Com(\cdot,\cdot)$：它允许一个人对一个选定的值 $v$ 做出承诺commit，该值 $v$ 对其他人是不可见的。通常该过程必须要满足hiding特性，即收到该承诺commit的接收者无法获取关于承诺值 $v$ 的任何信息。
 
 - 如果接收者是概率多项式的，则称 computationally hiding；
 - 如果接收者是有无限计算能力的人，则称 perfectly hiding。
@@ -109,7 +109,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 
 ![1564989748832](images/1564989748832.png)
 
-**（2）揭示阶段**（value is revealed and checked）$Open(\cdot,\cdot)$：发送者在以后某个时间揭露他之前承诺的值（reveal the committed value）。该过程必须满足 binding 特性，即发送者在该阶段能成功揭示的值有且仅有一个，也就是之前作出承诺的那个值$v$。
+**（2）揭示阶段**（value is revealed and checked） $Open(\cdot,\cdot)$：发送者在以后某个时间揭露他之前承诺的值（reveal the committed value）。该过程必须满足 binding 特性，即发送者在该阶段能成功揭示的值有且仅有一个，也就是之前作出承诺的那个值 $v$。
 
 - 如果发送者是概率多项式的，则称 computationally binding；
 - 如果发送者是有无限计算能力的人，则称 perfectly binding。
@@ -122,8 +122,8 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 
 一个非交互的 trapdoor 承诺方案主要包含如下 4 个算法：
 
-- $KG$：密钥生成算法，输入为安全参数，输出为一对密钥 $(pk,tk)$，其中 $pk$ 是用于计算承诺值的公钥，$tk$ 称为 trapdoor。
-- $Com$：承诺算法，输入为公钥 $pk$ 和消息 $M$，输出为 $Com(pk,M,r) = [C(M),D(M)]$，其中 $r$ 为随机选择的随机数，$C(M)$ 为承诺 commitment string，$D(M)$ 为 decommitment string，$D(M)$ 私密保存直到承诺打开阶段。
+- $KG$：密钥生成算法，输入为安全参数，输出为一对密钥 $(pk,tk)$，其中 $pk$ 是用于计算承诺值的公钥， $tk$ 称为 trapdoor。
+- $Com$：承诺算法，输入为公钥 $pk$ 和消息 $M$，输出为 $Com(pk,M,r) = [C(M),D(M)]$，其中 $r$ 为随机选择的随机数， $C(M)$ 为承诺 commitment string， $D(M)$ 为 decommitment string， $D(M)$ 私密保存直到承诺打开阶段。
 - $Ver$：验证算法，输入为 $C,D,pk$，输出为消息 $M$ 或者 $\perp$。
 - $Equiv$：承诺打开算法，给定 trapdoor 信息的情况下，尝试使用任何的方式来打开承诺。即利用输入 $pk,M,R$，满足 $Com(pk,M,R)=[C(M),D(M)]$ 以及消息 $M'\neq M$ 和字符串 $T$。如果 $T=tk$，则 $Equiv$ 算法输出 $D'$ 且满足 $Ver(pk,C(M),D') = M'$。
 
@@ -132,7 +132,7 @@ A commitment scheme is a cryptographic primitive that allows one to commit to a 
 trapdoor 承诺必须满足如下性质：
 
 - **Correctness**：如果 $Com(pk,M,R) = [C(M),D(M)]$，则 $Ver(pk,C(M),D(M))=M$
-- **Information Theoretic Security**：对于每一个消息对 $M,M'$，$C(M)$ 的分布与 $C(M')$ 的分布是统计逼近的
+- **Information Theoretic Security**：对于每一个消息对 $M,M'$， $C(M)$ 的分布与 $C(M')$ 的分布是统计逼近的
 - **Secure Binding**：如果敌手 $\mathcal{A}$ 输出 $C,D,D'$ 使得 $Ver(pk,C,D)=M, Ver(pk,C,D')=M'$ 并且 $M\neq M'$，则我们称敌手 $\mathcal{A}$ 赢。安全 binding 是指针对所有有效算法 $\mathcal{A}$，它赢的概率是可忽略的。
 - **Non-malleable**：对于敌手 $\mathcal{A}$，给定承诺 $C(M)$，它无法生成另一个承诺 $C'$ 使得在看到承诺 $C$ 的打开算法之后，依然成功的 decommit $C'$ 得到 $M’$。
 
@@ -149,8 +149,8 @@ Paillier 算法主要包含如下 3 个算法：
   - 计算 $N=pq, \lambda(N) = lcm(p-1,q-1)$，其中 $lcm$ 表示最小公倍数；
   - 随机选择 $\Gamma\in \mathbb{Z}_{N^2}^*$ 使得 $\Gamma$ 的阶为 $N$ 的倍数；
   - 公钥 $pk=(N,\Gamma)$，私钥 $sk=\lambda(N)$。
-- $Encryption$：加密的消息为 $m\in \mathbb{Z}_N$，随机选择 $x\in_{\mathcal{R}}\mathbb{Z}_N^*$，返回 $c=\Gamma^mx^N\space mod\space N^2$
-- $Decryption$：解密的密文 $c\in \mathbb{Z}_{N^2}$，令 $L$ 定义在集合 $\mathcal{S}=\{u\in \mathbb{Z}_{N^2} : u\equiv 1\space mod \space N\}$ 的函数且 $L(u) = \frac{u-1}{N}$，则解密的消息 $m=\frac{L(c^{\lambda})}{L(\Gamma^{\lambda})} \space  mod\space N$。
+- $Encryption$：加密的消息为 $m \in \mathbb{Z}_N$ ，随机选择 $x\in_{\mathcal{R}}\mathbb{Z}_N^*$ ，返回 $c=\Gamma^mx^N\space mod\space N^2$
+- $Decryption$：解密的密文 $c\in \mathbb{Z}_{N^2}$ ，令 $L$ 定义在集合 $\mathcal{S}=\{u\in \mathbb{Z}_{N^2} : u\equiv 1\space mod \space N\}$ 的函数且 $L(u) = \frac{u-1}{N}$，则解密的消息 $m=\frac{L(c^{\lambda})}{L(\Gamma^{\lambda})} \space  mod\space N$。
 
 ## 3.2. 同态属性
 
@@ -399,7 +399,7 @@ $$
 
 **Phase3：**
 
-从参设设置中我们知道 $\mathcal{E}$ 为 paillier 加密方案，$E_i=(N_i,\Gamma_i)$ 为每个参与者 $P_i$ 的 paillier加密方案对应的公钥。
+从参设设置中我们知道 $\mathcal{E}$ 为 paillier 加密方案， $E_i=(N_i,\Gamma_i)$ 为每个参与者 $P_i$ 的 paillier加密方案对应的公钥。
 
 > $P_1: N_1=p_1q_1$；生成 ZK 证明其知道自己的私钥 $x_1$；生成 ZK 证明其知道 $p_1,q_1$
 >
@@ -471,7 +471,7 @@ $$
   >
   > $P_n: k_n,\gamma_n \in \mathbb{Z}_q$, compute  $Com(g^{\gamma_n}) =[C_n,D_n] ,C_n = H(g^{\gamma_n}||r_n')$
 
-- 定义 $k = \sum_{i=1}^{t'}k_i = k_1+k_2+\ldots+k_{t'}$，$\gamma = \sum_{i=1}^{t'}\gamma_i=\gamma_1+\gamma_2+\ldots+\gamma_{t'}$
+- 定义 $k = \sum_{i=1}^{t'}k_i = k_1+k_2+\ldots+k_{t'}$， $\gamma = \sum_{i=1}^{t'}\gamma_i=\gamma_1+\gamma_2+\ldots+\gamma_{t'}$
 
 - 可以发现：
   $$
@@ -481,13 +481,13 @@ $$
 
 **Phase 2**：每一对参与者 $P_i,P_j$ 会执行两个 MtA 协议
 
-- $P_i,P_j$ 运行 MtA 协议 with shares $k_i,\gamma_j$，令 $\alpha_{ij}$ 为 $P_i$ 最终收到的 share，$\beta_{ij}$ 为$P_j$ 最终收到的 share，则有：
+- $P_i,P_j$ 运行 MtA 协议 with shares $k_i,\gamma_j$，令 $\alpha_{ij}$ 为 $P_i$ 最终收到的 share， $\beta_{ij}$ 为$P_j$ 最终收到的 share，则有：
   $$
   k_i\gamma_j = \alpha_{ij} + \beta_{ij}
   $$
   参与者 $P_i$设置$\delta_i = k_i\gamma_i +\sum_{j\neq i} \alpha_{ij} + \sum_{j \neq i}\beta_{ji}$，可以发现$\delta_i$ 是一个 $(t',t')$ additive sharing of $k\gamma = \sum_{i\in S}\delta_i$
 
-- $P_i,P_j$ 运行 MtAwc 协议 with shares $k_i,\omega_j$，令 $\mu_{ij}$ 为 $P_i$ 最终收到的 share，$\nu_{ij}$ 为 $P_j$ 最终收到的 share，则有：
+- $P_i,P_j$ 运行 MtAwc 协议 with shares $k_i,\omega_j$，令 $\mu_{ij}$ 为 $P_i$ 最终收到的 share， $\nu_{ij}$ 为 $P_j$ 最终收到的 share，则有：
   $$
   k_i\omega_j = \mu_{ij} + \nu_{ij}
   $$
